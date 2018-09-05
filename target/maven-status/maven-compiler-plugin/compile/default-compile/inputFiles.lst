@@ -1,0 +1,11 @@
+C:\workspace\diff_service\src\main\java\com\waes\controller\response\DataDiffResponse.java
+C:\workspace\diff_service\src\main\java\com\waes\services\MongoService.java
+C:\workspace\diff_service\src\main\java\com\waes\services\MongoServiceImpl.java
+C:\workspace\diff_service\src\main\java\com\waes\controller\response\Difference.java
+C:\workspace\diff_service\src\main\java\com\waes\services\DiffService.java
+C:\workspace\diff_service\src\main\java\com\waes\model\mongo\ComparableData.java
+C:\workspace\diff_service\src\main\java\com\waes\controller\DiffControler.java
+C:\workspace\diff_service\src\main\java\com\waes\services\DiffServiceImpl.java
+C:\workspace\diff_service\src\main\java\com\waes\config\MongoConfiguration.java
+C:\workspace\diff_service\src\main\java\com\waes\Main.java
+C:\workspace\diff_service\src\main\java\com\waes\exceptions\IdNotFoundException.java
