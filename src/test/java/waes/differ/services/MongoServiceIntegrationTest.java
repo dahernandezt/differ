@@ -1,4 +1,4 @@
-package com.waes.services;
+package waes.differ.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -16,10 +16,12 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.waes.controller.response.DataDiffResponse;
-import com.waes.model.mongo.ComparableData;
-
 import javassist.NotFoundException;
+import waes.differ.model.dto.DataDiffResponse;
+import waes.differ.model.mongo.ComparableData;
+import waes.differ.services.DiffServiceImpl;
+import waes.differ.services.MongoService;
+import waes.differ.services.MongoServiceImpl;
 
 @RunWith(SpringRunner.class)
 @DataMongoTest

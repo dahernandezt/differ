@@ -1,4 +1,4 @@
-package com.waes.services;
+package waes.differ.services;
 
 import java.util.Base64;
 import java.util.Objects;
@@ -9,9 +9,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import com.waes.controller.response.DataDiffResponse;
-import com.waes.exceptions.IdNotFoundException;
-import com.waes.model.mongo.ComparableData;
+import waes.differ.exceptions.IdNotFoundException;
+import waes.differ.model.dto.DataDiffResponse;
+import waes.differ.model.mongo.ComparableData;
 
 @Service
 public class MongoServiceImpl implements MongoService {

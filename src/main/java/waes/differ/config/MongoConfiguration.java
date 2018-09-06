@@ -1,4 +1,4 @@
-package com.waes.config;
+package waes.differ.config;
 
 import java.io.IOException;
 
@@ -16,6 +16,11 @@ public class MongoConfiguration {
     private static final String MONGO_DB_URL = "localhost";
     private static final String MONGO_DB_NAME = "embeded_db";
     
+    /**
+     * Configuration bean that allows to run database operations against the embedded mongo database.
+     * @return {@link MongoTemplate}
+     * @throws IOException
+     */
     @Bean
     public MongoTemplate mongoTemplate() throws IOException {
         EmbeddedMongoFactoryBean mongo = new EmbeddedMongoFactoryBean();

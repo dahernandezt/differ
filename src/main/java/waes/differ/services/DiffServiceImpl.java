@@ -1,4 +1,4 @@
-package com.waes.services;
+package waes.differ.services;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -7,8 +7,8 @@ import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
-import com.waes.controller.response.DataDiffResponse;
-import com.waes.controller.response.Difference;
+import waes.differ.model.dto.DataDiffResponse;
+import waes.differ.model.dto.Difference;
 
 @Service
 public class DiffServiceImpl implements DiffService {
@@ -17,16 +17,16 @@ public class DiffServiceImpl implements DiffService {
 	public DataDiffResponse getDiff(byte[] left, byte[] right) {
 		DataDiffResponse diffResult = new DataDiffResponse();
 		
-		if(Objects.isNull(left) || Objects.isNull(right)) {
+		if(Objects.isNull(left) || Objects.isNull(right)) {//if any side is null the comparison is considered as different content.
 			diffResult.setEqualSize(false);
 			diffResult.setEqualData(false);
-		} else if (left.length != right.length) {
+		} else if (left.length != right.length) {//if both pieces of data have different size, differences are not calculated.
 			diffResult.setEqualSize(false);
 			diffResult.setEqualData(false);
-		} else if (Arrays.equals(left, right)) {
+		} else if (Arrays.equals(left, right)) {//if both pieces of data are equal, differences are not calculated.
 			diffResult.setEqualSize(true);
 			diffResult.setEqualData(true);
-		} else {
+		} else { 
 			diffResult.setEqualSize(true);
 			diffResult.setEqualData(false);
 			diffResult.setDifferences(getOffsets(left, right));
@@ -34,6 +34,10 @@ public class DiffServiceImpl implements DiffService {
 		return diffResult;
 	}
 
+	/*
+	 * Make a byte to byte comparison and store differences in a list. 
+	 * 
+	*/
 	private ArrayList<Difference> getOffsets(byte[] left, byte[] right) {
 		ArrayList<Difference> differences = new ArrayList<>();
 		BigInteger diffLength = BigInteger.ZERO;

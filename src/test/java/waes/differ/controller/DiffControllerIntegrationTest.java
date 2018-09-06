@@ -1,4 +1,4 @@
-package com.waes.controller;
+package waes.differ.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -25,9 +25,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.waes.controller.response.DataDiffResponse;
-import com.waes.services.DiffServiceImpl;
-import com.waes.services.MongoServiceImpl;
+
+import waes.differ.controller.DiffControler;
+import waes.differ.model.dto.DataDiffResponse;
+import waes.differ.services.DiffServiceImpl;
+import waes.differ.services.MongoServiceImpl;
 
 
 @RunWith(SpringRunner.class)

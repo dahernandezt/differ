@@ -1,4 +1,4 @@
-package com.waes.services;
+package waes.differ.services;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.waes.controller.response.DataDiffResponse;
+import waes.differ.model.dto.DataDiffResponse;
+import waes.differ.services.DiffService;
+import waes.differ.services.DiffServiceImpl;
 
 
 @RunWith(SpringRunner.class)
