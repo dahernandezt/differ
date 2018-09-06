@@ -50,7 +50,5 @@ spring configuration properties features.
 
 
 * Currently it is allowed to call the left and right endpoints several times with the same Id and data will be overrided. Data single entry may be adopted adding a validation and returning an exception handled as a 404 or 409 http code when trying to duplicate calls.
- 
 
-* Currently diff is allowed with at least one side (left or right) saved returned as different content and size, if both sides need to be enforced a validation can be added and incomplete data may return a 204 Code. 
 
