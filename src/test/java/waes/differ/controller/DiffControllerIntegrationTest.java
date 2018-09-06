@@ -30,12 +30,13 @@ import waes.differ.controller.DiffControler;
 import waes.differ.model.dto.DataDiffResponse;
 import waes.differ.services.DiffServiceImpl;
 import waes.differ.services.MongoServiceImpl;
+import waes.differ.services.ValidationServiceImpl;
 
 
 @RunWith(SpringRunner.class)
 @EnableAutoConfiguration
 @WebAppConfiguration
-@ContextConfiguration(classes =  {DiffControler.class, MongoServiceImpl.class, DiffServiceImpl.class})
+@ContextConfiguration(classes =  {DiffControler.class, MongoServiceImpl.class, DiffServiceImpl.class, ValidationServiceImpl.class})
 public class DiffControllerIntegrationTest {
 	
 	private MockMvc mockMvc;
@@ -57,8 +58,26 @@ public class DiffControllerIntegrationTest {
 		mockMvc
 			.perform(post("/v1/diff/1/left")
 					.contentType(MediaType.TEXT_PLAIN)
-					.content("ABC"))
+					.content("eyAidmFsaWQiOiAiNTY3OCJ9"))
 			.andExpect(status().isOk());
+	}
+	
+	@Test
+    public void testRightEndpointInvalidJSON() throws Exception {
+		mockMvc
+			.perform(post("/v1/diff/2/right")
+					.contentType(MediaType.TEXT_PLAIN)
+					.content("VGhpcyBpcyBub3QgYSBqc29uIG9iamVjdA=="))
+			.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+    public void testLeftEndpointInvalidJSON() throws Exception {
+		mockMvc
+			.perform(post("/v1/diff/1/left")
+					.contentType(MediaType.TEXT_PLAIN)
+					.content("VGhpcyBpcyBub3QgYSBqc29uIG9iamVjdA=="))
+			.andExpect(status().isBadRequest());
 	}
 	
 	@Test
@@ -66,7 +85,7 @@ public class DiffControllerIntegrationTest {
 		mockMvc
 			.perform(post("/v1/diff/2/right")
 					.contentType(MediaType.TEXT_PLAIN)
-					.content("ABC"))
+					.content("eyAidmFsaWQiOiAiZmFsc2UifQ=="))
 			.andExpect(status().isOk());
 	}
 	
@@ -83,13 +102,13 @@ public class DiffControllerIntegrationTest {
 		mockMvc
 		.perform(post("/v1/diff/4/left")
 				.contentType(MediaType.TEXT_PLAIN)
-				.content("ABC"))
+				.content("eyAidmFsaWQiOiAiZmFsc2UifQ=="))
 		.andExpect(status().isOk());
 		
 		mockMvc
 		.perform(post("/v1/diff/4/right")
 				.contentType(MediaType.TEXT_PLAIN)
-				.content("ABC"))
+				.content("eyAidmFsaWQiOiAiZmFsc2UifQ=="))
 		.andExpect(status().isOk());
 		
 		MvcResult result = mockMvc
@@ -110,13 +129,13 @@ public class DiffControllerIntegrationTest {
 		mockMvc
 		.perform(post("/v1/diff/5/left")
 				.contentType(MediaType.TEXT_PLAIN)
-				.content("RGlmZmVyZW50IFNpemU="))
+				.content("eyAidmFsaWQiOiAiZmFsc2UifQ=="))
 		.andExpect(status().isOk());
 		
 		mockMvc
 		.perform(post("/v1/diff/5/right")
 				.contentType(MediaType.TEXT_PLAIN)
-				.content("RGlmZmVyZW50IFNpemUrKw=="))
+				.content("eyAidmFsaWQiOiAidHJ1ZSJ9"))
 		.andExpect(status().isOk());
 		
 		MvcResult result = mockMvc
@@ -137,13 +156,13 @@ public class DiffControllerIntegrationTest {
 		mockMvc
 		.perform(post("/v1/diff/6/left")
 				.contentType(MediaType.TEXT_PLAIN)
-				.content("RGlmZmVyZW50IENvbnRlbnQgMTExIDExIDExIDEx"))
+				.content("eyAidmFsaWQiOiAiMTIzNCJ9"))
 		.andExpect(status().isOk());
 		
 		mockMvc
 		.perform(post("/v1/diff/6/right")
 				.contentType(MediaType.TEXT_PLAIN)
-				.content("RGlmZmVyZW50IENvbnRlbnQgMjIyIDExIDIyIDEx"))
+				.content("eyAidmFsaWQiOiAiNTY3OCJ9"))
 		.andExpect(status().isOk());
 		
 		MvcResult result = mockMvc
@@ -156,10 +175,8 @@ public class DiffControllerIntegrationTest {
 		
 		assertFalse(response.isEqualData());
 		assertTrue(response.isEqualSize());
-		assertEquals(new BigInteger("18"), response.getDifferences().get(0).getOffset());
-		assertEquals(new BigInteger("3"), response.getDifferences().get(0).getLength());
-		assertEquals(new BigInteger("25"), response.getDifferences().get(1).getOffset());
-		assertEquals(new BigInteger("2"), response.getDifferences().get(1).getLength());
+		assertEquals(new BigInteger("12"), response.getDifferences().get(0).getOffset());
+		assertEquals(new BigInteger("4"), response.getDifferences().get(0).getLength());
 	}
 
 

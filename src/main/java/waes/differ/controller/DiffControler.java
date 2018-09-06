@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import javassist.NotFoundException;
 import waes.differ.model.dto.DataDiffResponse;
 import waes.differ.services.MongoService;
+import waes.differ.services.ValidationService;
 
 @RestController
 @RequestMapping(value = "/v1/diff")
@@ -20,10 +21,14 @@ public class DiffControler {
 	@Autowired
 	MongoService mongoService;
 	
+	@Autowired
+	ValidationService validationService;
+	
 	@ApiOperation(value = "Diff Strings", tags = {"Diff"})
 	@RequestMapping(value = "/{id}/left", method = RequestMethod.POST)
 	@ResponseBody
 	public void saveLeft(@PathVariable("id") String id, @RequestBody byte[] data) {
+		validationService.validateEncodedJsonData(data);
 		mongoService.saveLeft(data, id);
 	}
 	
@@ -31,6 +36,7 @@ public class DiffControler {
 	@RequestMapping(value = "/{id}/right", method = RequestMethod.POST)
 	@ResponseBody
 	public void saveRight(@PathVariable("id") String id, @RequestBody byte[] data) {
+		validationService.validateEncodedJsonData(data);
 		mongoService.saveRight(data, id);
 	}
 	

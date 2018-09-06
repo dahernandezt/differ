@@ -37,21 +37,21 @@ public class MongoServiceIntegrationTest {
 	
 	@Test
     public void testSaveLeft() {
-		mongoService.saveLeft(("ABC").getBytes(), "12");
-        assertTrue(Arrays.equals(mongoTemplate.findOne(Query.query(Criteria.where("uniqueId").is("12")), ComparableData.class).getLeft(),("ABC").getBytes()));
+		mongoService.saveLeft(("eyAidmFsaWQiOiAiZmFsc2UifQ==").getBytes(), "12");
+        assertTrue(Arrays.equals(mongoTemplate.findOne(Query.query(Criteria.where("uniqueId").is("12")), ComparableData.class).getLeft(),("eyAidmFsaWQiOiAiZmFsc2UifQ==").getBytes()));
     }
 	
 	@Test
     public void testSaveRight() {
-		mongoService.saveRight(("ABC").getBytes(), "12");
-        assertTrue(Arrays.equals(mongoTemplate.findOne(Query.query(Criteria.where("uniqueId").is("12")), ComparableData.class).getRight(),("ABC").getBytes()));
+		mongoService.saveRight(("eyAidmFsaWQiOiAiZmFsc2UifQ==").getBytes(), "13");
+        assertTrue(Arrays.equals(mongoTemplate.findOne(Query.query(Criteria.where("uniqueId").is("13")), ComparableData.class).getRight(),("eyAidmFsaWQiOiAiZmFsc2UifQ==").getBytes()));
     }
 	
 	@Test
     public void testGetDiff() throws NotFoundException {
-		mongoService.saveRight(("ABC").getBytes(), "12");
-		mongoService.saveLeft(("ABC").getBytes(), "12");
-		DataDiffResponse response = mongoService.getDiff("12");
+		mongoService.saveRight(("eyAidmFsaWQiOiAiZmFsc2UifQ==").getBytes(), "14");
+		mongoService.saveLeft(("eyAidmFsaWQiOiAiZmFsc2UifQ==").getBytes(), "14");
+		DataDiffResponse response = mongoService.getDiff("14");
         assertTrue(response.isEqualData());
         assertTrue(response.isEqualSize());
         assertEquals(0, response.getDifferences().size());

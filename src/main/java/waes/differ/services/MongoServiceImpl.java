@@ -21,7 +21,7 @@ public class MongoServiceImpl implements MongoService {
 	
 	@Autowired
 	DiffService diffService;
-
+	
 	@Override
 	public String saveLeft(byte[] left, String uniqueId) {
 		ComparableData comparableData = mongoTemplate.findOne(Query.query(Criteria.where("uniqueId").is(uniqueId)), ComparableData.class);
